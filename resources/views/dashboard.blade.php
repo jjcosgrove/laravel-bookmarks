@@ -42,22 +42,24 @@
                 <li class="sidebar-section-title">
                     <p class="text-uppercase">Tags</p>
                 </li>
-                <li>
-                    <a class="tag-filter" href="#">
-                        <i class="fa fa-tag"></i>
-                        <span class="tag-name">Untagged</span>
-                        <span class="tag-count">{{ $stats['untagged_count'] }}</span>
-                    </a>
-                </li>
-                @foreach ( $tags as $tag )
-                <li>
-                    <a class="tag-filter" href="#">
-                        <i class="fa fa-tag"></i>
-                        <span class="tag-name">{{ $tag->name }}</span>
-                        <span class="tag-count">{{ $tag->visible_bookmarks_count() }}</span>
-                    </a>
-                </li>
-                @endforeach
+                <div class="tag-list">
+                    <li>
+                        <a class="tag-filter" href="#">
+                            <i class="fa fa-tag"></i>
+                            <span class="tag-name">Untagged</span>
+                            <span class="tag-count">{{ $stats['untagged_count'] }}</span>
+                        </a>
+                    </li>
+                    @foreach ( $tags as $tag )
+                    <li>
+                        <a class="tag-filter" href="#">
+                            <i class="fa fa-tag"></i>
+                            <span class="tag-name">{{ $tag->name }}</span>
+                            <span class="tag-count">{{ $tag->visible_bookmarks_count() }}</span>
+                        </a>
+                    </li>
+                    @endforeach
+                </div>
             </ul>
         </div>
         <div id="page-content-wrapper">

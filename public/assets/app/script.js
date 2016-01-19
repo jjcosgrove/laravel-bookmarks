@@ -4,6 +4,7 @@ $(document).ready(function() {
     EnableVisibilityFilter();
     EnableTagFilter();
     EnableSearchFilter();
+    EnableTagContainerResizeDetect();
 });
 
 /**
@@ -151,5 +152,32 @@ function EnableSearchFilter() {
             if (searchString.indexOf(searchFilterValue) >= 0)
                 $(this).closest('.bookmark-item').show();
         });
+    });
+}
+
+function EnableTagContainerResizeDetect() {
+    var sidebarOffset = 50;
+
+    //do an initial calculation
+    var offset = $('.navbar').height() + $($('.sidebar-nav')[0]).height() + $($('.sidebar-nav')[1]).height() + $($('.sidebar-section-title')[2]).height()
+    var windowHeight = $(window).height();
+    $('.tag-list').height(windowHeight - offset - sidebarOffset);
+
+    $(function() {
+
+        var mainWin = $(window);
+        var width = $(mainWin).width();
+        var height = $(mainWin).height();
+
+        setInterval(function() {
+            if ((width != (mainWin).width()) || (height != (mainWin).height())) {
+                width = $(mainWin).width();
+                height = $(mainWin).height();
+
+                var offset = $('.navbar').height() + $($('.sidebar-nav')[0]).height() + $($('.sidebar-nav')[1]).height() + $($('.sidebar-section-title')[2]).height()
+                var windowHeight = $(window).height();
+                $('.tag-list').height(windowHeight - offset - sidebarOffset);
+            }
+        }, 300);
     });
 }

@@ -52,6 +52,9 @@ ul.tagit li.tagit-new {
 .main-container.dashboard {
     margin-top: 65px;
 }
+#sidebar-wrapper {
+    overflow: hidden;
+}
 .sidebar-nav {
     position: relative;
 }
@@ -67,6 +70,9 @@ ul.tagit li.tagit-new {
 .sidebar-nav .tag-count {
     float: right;
     margin-right: 35px;
+}
+.tag-list {
+    overflow-y: auto;
 }
 .fa {
     margin-right: 10px;
