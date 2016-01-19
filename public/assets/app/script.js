@@ -148,7 +148,7 @@ function EnableSearchFilter() {
             searchString = searchString.concat($(this).closest('.bookmark-item').find('.username').text().trim().toLowerCase());
 
             //show any bookmarks that match the search
-            if (searchString.contains(searchFilterValue))
+            if (searchString.indexOf(searchFilterValue) >= 0)
                 $(this).closest('.bookmark-item').show();
         });
     });
