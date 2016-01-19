@@ -1,0 +1,15 @@
+{
+  "name": "laravel-bookmarks",
+  "description": "A bookmark manager",
+  "dependencies": {
+    "animate-css": "master",
+    "fontawesome": "~4.5",
+    "jquery": "~1.11.3",
+    "jquery-ui": "master",
+    "bootstrap": "~3.3.6",
+    "startbootstrap-simple-sidebar": "master",
+    "bootswatch": "gh-pages",
+    "tag-it": "master"
+  },
+  "private": true
+}
