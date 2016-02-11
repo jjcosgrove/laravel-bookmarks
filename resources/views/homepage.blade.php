@@ -28,7 +28,7 @@
                         </li>
                         <li>Lots more</li>
                     </ul>
-                    <p>You can grab the latest version from <a target="_blank" href="https://github.com/jjcosgrove/bookmarks-laravel">GitHub <i class="fa fa-github"></i></a></p>
+                    <p>You can grab the latest version from <a target="_blank" href="https://github.com/jjcosgrove/laravel-bookmarks">GitHub <i class="fa fa-github"></i></a></p>
                 </div>
             </div>
         </div>
