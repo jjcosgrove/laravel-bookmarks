@@ -89,14 +89,14 @@
                         <div class="list-group bookmark-list">
                             @foreach ( $bookmarks as $bookmark )
                             <a bookmark-id="{{ $bookmark->id }}" class="list-group-item bookmark-item" private="{{ $bookmark->private == 1 ? 'true' : 'false' }}" target="_blank" href="{{ $bookmark->url }}">
-                                <h4 class="list-group-item-heading name">{{ $bookmark->name }}</h4>
+                                <span class="list-group-item-heading name">{{ $bookmark->name }}</span>
                                 <p class="created-by">
-                                    Created by <span class="username">{{ $bookmark->user->username }}</span> on {{ date('d-m-Y \a\t h:m:s', strtotime($bookmark->created_at)) }}
+                                    Created by <span class="username">{{ $bookmark->user->username }}</span> on {{ date('d/m/Y \a\t h:m:s', strtotime($bookmark->created_at)) }}
                                 </p>
                                 <p class="url">
                                     <strong>URL:</strong> {{ $bookmark->url }}
                                 </p>
-                                <ul class="list-inline">
+                                <ul class="list-inline tags-list">
                                     <i class="fa fa-tag"></i>
                                     @if ( count($bookmark->tags) )
                                         @foreach ( $bookmark->tags as $tag )

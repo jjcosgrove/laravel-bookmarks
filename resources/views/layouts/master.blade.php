@@ -39,7 +39,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right account">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             <i class="fa fa-user"></i><span class="caret"></span>

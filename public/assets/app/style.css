@@ -1,10 +1,29 @@
-html,body {
+/* general */
+html, body {
     width: 100%;
     height: 100%;
     position: absolute;
 }
 body {
     overflow-y: visible;
+}
+.navbar-brand .fa-bookmark {
+    margin-right: 10px;
+}
+.account .fa-sign-out {
+    margin-right: 10px;
+}
+.dashboard .navbar {
+    margin-bottom: 0;
+}
+.main-container {
+    margin-top: 85px;
+}
+.main-container.dashboard {
+    margin-top: 65px;
+}
+.user-message {
+    padding: 15px;
 }
 
 /* boostrap overrides */
@@ -15,43 +34,49 @@ body {
     border-radius: 0;
 }
 
-/* taggit overrides */
-.ui-helper-hidden-accessible {
+/* taggit overrides - overqualified to avoid !important */
+span.ui-helper-hidden-accessible {
     display: none;
 }
 ul.tagit {
     padding: 0;
 }
+ul.tagit li.tagit-choice::after {
+    content: ",";
+}
 ul.tagit li.tagit-choice-editable {
     padding: 0;
 }
 ul.tagit li.tagit-new {
-    padding: 0;
+    padding: 2px;
+    margin: 0;
 }
-.tagit-autocomplete {
+ul.tagit-autocomplete {
+    padding-left: 0;
     z-index: 9999;
 }
-.tagit-label {
+span.tagit-label {
     display: inline;
     border: 1px solid #CCC;
-    padding: 2px 5px;
+    padding: 5px 12px;
     border-radius: 3px;
     margin-right: 2px;
+    font-size: 1.2em;
 }
-.tagit-autocomplete {
-    padding-left: 0;
+ul.tagit-autocomplete li.ui-menu-item {
+    list-style-type: none;
+    display: inline;
+    border: 1px solid rgb(204, 204, 204);
+    padding: 6px 14px;
+    border-radius: 3px;
+    margin-left: 5px;
+    font-size: 1.2em;
+}
+ul.tagit-autocomplete li.ui-menu-item:first-child {
+    margin-left: 0;
 }
 
-/* general */
-.dashboard .navbar {
-    margin-bottom: 0;
-}
-.main-container {
-    margin-top: 85px;
-}
-.main-container.dashboard {
-    margin-top: 65px;
-}
+/* sidebar */
 #sidebar-wrapper {
     overflow: hidden;
 }
@@ -61,7 +86,7 @@ ul.tagit li.tagit-new {
 .sidebar-section-title {
     color: #FFFFFF;
 }
-.sidebar-nav li a.selected {
+.sidebar-nav .selected {
     text-decoration: none;
     color: #FFF;
     background: rgba(255, 255, 255, 0.2) none repeat scroll 0% 0%;
@@ -71,24 +96,25 @@ ul.tagit li.tagit-new {
     float: right;
     margin-right: 35px;
 }
-.tag-list {
+.sidebar-nav .tag-list {
     overflow-y: auto;
 }
-.fa {
+.sidebar-nav .fa {
     margin-right: 10px;
-}
-.user-message {
-    padding: 15px;
 }
 
 /* bookmarks */
-.bookmark-list p {
+.bookmark-list .created-by,
+.bookmark-list .url {
     margin-bottom: 0;
 }
-.bookmark-list ul {
+.bookmark-list .tags-list {
     margin-top: 10px;
     margin-left: 0;
     margin-bottom: 0;
+}
+.bookmark-list .fa-tag {
+    margin-right: 2px;
 }
 .bookmark-list .tag::after {
     content: ",";
@@ -102,7 +128,7 @@ ul.tagit li.tagit-new {
     position: absolute;
     right: 0;
 }
-.bookmark-list .private-status.fa-lock {
+.bookmark-list .fa-lock {
     right: 8px;
 }
 .bookmark-list .delete-button {
@@ -116,9 +142,16 @@ ul.tagit li.tagit-new {
     right: 0;
     color: rgb(203, 85, 85);
 }
+.bookmark-item .name {
+    font-size: 1.2em;
+    font-weight: 700;
+}
+.bookmark-item .url{
+    overflow: hidden;
+}
 
 /* search */
-ul.search {
+.search {
     list-style-type: none;
     padding: 0;
     margin-right: 35px;
@@ -150,20 +183,9 @@ ul.search {
     margin: 0 auto;
     width: 100%;
 }
-.bookmark-form .tagit-choice::after {
-    content: ",";
+.bookmark-form #name, .bookmark-form #url {
+    padding-left: 2px;
 }
-.ui-menu-item {
-    list-style-type: none;
-    display: inline;
-    border: 1px solid rgb(204, 204, 204);
-    padding: 2px 5px;
-    border-radius: 3px;
-    margin-left: 5px;
-}
-.ui-menu-item:first-child {
-    margin-left: 0;
-}
-.cancel {
+.bookmark-form .cancel {
     margin-left: 10px;
 }
