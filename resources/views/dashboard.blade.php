@@ -106,6 +106,15 @@
                                     <li class="tag">Untagged</li>
                                     @endif
                                 </ul>
+                                <form class="pull-right update-form" action="{{ route('update') }}" method="POST" role="form" autocomplete="off">
+                                    {!! csrf_field() !!}
+                                    <input class="hidden" type="text" id="bm_id" name="bm_id" value="{{ $bookmark->id }}">
+                                    <input class="hidden" type="text" id="bm_name" name="bm_name" value="{{ $bookmark->name }}">
+                                    <input class="hidden" type="text" id="bm_url" name="bm_url" value="{{ $bookmark->url }}">
+                                    <input class="hidden" type="text" id="bm_tags" name="bm_tags" value="{{ $bookmark->tags_as_string }}">
+                                    <input class="hidden" type="checkbox" id="bm_private" name="bm_private" {{ $bookmark->private == 1 ? 'checked' : '' }}>
+                                    <button class="update-button" type="submit"><i class="fa fa-2x action fa-pencil update-bookmark"></i></button>
+                                </form>
                                 <form class="pull-right delete-form" action="{{ route('delete') }}" method="POST" role="form" autocomplete="off">
                                     {!! csrf_field() !!}
                                     <input class="hidden" type="text" id="bm_id" name="bm_id" value="{{ $bookmark->id }}">
@@ -122,4 +131,5 @@
     </div>
 </div>
 @include('layouts.new-bookmark')
+@include('layouts.update-bookmark')
 @endsection

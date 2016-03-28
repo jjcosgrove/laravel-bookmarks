@@ -40,6 +40,10 @@ Route::group(['middleware' => 'web'], function () {
         'as' => 'add',
         'uses' => 'BookmarksController@addBookmark'
     ]);
+     Route::post('/dashboard/update', [
+        'as' => 'update',
+        'uses' => 'BookmarksController@updateBookmark'
+    ]);
     Route::post('/dashboard/delete', [
         'as' => 'delete',
         'uses' => 'BookmarksController@deleteBookmark'

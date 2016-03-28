@@ -41,10 +41,18 @@ class BookmarksController extends Controller
 
         //grab only the tags that this user has permission to see
         $tags = new Collection();
-        foreach($bookmarks as $p_b) {
-            foreach($p_b->tags()->get() as $tag) {
+        foreach($bookmarks as $bookmark) {
+            $tags_as_string = "";
+            $these_tags = new Collection();
+            foreach($bookmark->tags()->get() as $tag) {
                 $tags->push($tag);
+                $these_tags->push($tag->name);
+               
             }
+            $tags_as_string = rtrim(implode(', ', $these_tags->sort()->toArray()),',');
+            //$tags_as_string = $tags_as_string,',');
+            $bookmark['tags'] = $bookmark['tags']->sortBy('name');
+            $bookmark['tags_as_string'] = $tags_as_string;
         }
         $tags = $tags->sortBy('name')->unique('name');
 
@@ -131,6 +139,62 @@ class BookmarksController extends Controller
         return redirect('dashboard')
             ->with('message',$message);
 
+    }
+
+    public function updateBookmark(Request $request)
+    {
+        //scope
+        $current_user = Auth::user();
+        
+        //grab the bookmark the user wishes to edit
+        $bookmark = Bookmark::where([
+            'user_id' => $current_user->id,
+            'id' => $request->id
+        ])->first();
+
+        //update the bookmark
+        $bookmark->name = $request->name;
+        $bookmark->url = $request->url;
+        $bookmark->private = $request->private == 'on' ? true : false;
+
+        //save it
+        $bookmark->save();
+
+        //if there are tags assigned...
+        if(!empty($request->tags)) {
+
+            //lets make an array of the tags
+            $tags = array();
+            $in_tags = explode(',',$request->tags);
+
+            //and associate each one to the current bookmark
+            foreach($in_tags as $in_tag) {
+                $tag = Tag::firstOrNew([
+                    'name' => $in_tag,
+                    'user_id' => $current_user->id
+                ]);
+                $tag->user()->associate($current_user->id);
+                $tag->save();
+                array_push($tags,$tag);
+            }
+
+            //save the tags
+            $bookmark->tags()->detach();
+            $bookmark->tags()->saveMany($tags);
+        } else {
+            //user removed all tags
+            $bookmark->tags()->detach();
+        }
+
+        //all is well, so pass back a message
+        $message = array(
+            'status' => 'OK', 
+            'message' => 'Bookmark updated!'
+        );
+
+        //redirect to the dashboard view with the message
+        return redirect('dashboard')
+            ->with('message',$message);
     }
 
     public function deleteBookmark(Request $request)

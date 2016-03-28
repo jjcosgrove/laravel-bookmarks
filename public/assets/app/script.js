@@ -1,6 +1,7 @@
 $(document).ready(function() {
     EnableUserMessages();
     EnableNewBookmarkForm();
+    EnableUpdateBookmarkForm();
     EnableVisibilityFilter();
     EnableTagFilter();
     EnableSearchFilter();
@@ -37,18 +38,73 @@ function EnableNewBookmarkForm() {
     });
 
     //initiate tagit with autocomplete
-    $('input[name="tags"]').tagit({
+    $('.bookmark-form.new input[name="tags"]').tagit({
         placeholderText: 'Add tags...',
         availableTags: tags_array
     });
 
     //clear the form if cancelled
-    $('.bookmark-form .cancel').on('click', function(e) {
+    $('.bookmark-form.new .cancel').on('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        $('.bookmark-form').trigger('reset');
-        $('input[name="tags"]').tagit('removeAll');
+        $('.bookmark-form.new').trigger('reset');
+        $('.bookmark-form.new input[name="tags"]').tagit('removeAll');
         $('.new-bookmark-container').addClass('hidden');
+    });
+}
+
+/**
+ * sets up the update bookmark form and populates
+ * fields
+ */
+function EnableUpdateBookmarkForm() {
+    //edit bookmark action/shortcut
+    
+    $('.update-form').submit(function(e){
+        e.preventDefault();
+        e.stopPropagation();
+
+        //populate edit form
+        var id = $(this).closest('.bookmark-item').attr('bookmark-id');
+        $('.bookmark-form.update input[name=id]').val(id);
+
+        var name = $(this).closest('.bookmark-item').find('input[name=bm_name]').val();
+        $('.bookmark-form.update input[name=name]').val(name);
+
+        var url = $(this).closest('.bookmark-item').find('input[name=bm_url]').val();
+        $('.bookmark-form.update input[name=url]').val(url);
+
+        var tags = $(this).closest('.bookmark-item').find('input[name=bm_tags]').val();
+
+        var is_private = $(this).closest('.bookmark-item').find('input[name=bm_private]').is(':checked');
+        $('.bookmark-form.update input[name=private]').prop('checked',is_private);
+
+        //scrape the tags and set up autocomplete for tagit
+        var tags_array = [];
+        $('.tag-filter').each(function() {
+            tags_array.push($(this).find('.tag-name').text());
+        });
+       
+        //set the value for the update form
+        $('.bookmark-form.update input[name=tags]').val(tags);
+        
+        //enable tagit with both the bookmarks tags and the global tags for autocomplete
+        $('.bookmark-form.update input[name="tags"]').tagit({
+            placeholderText: 'Add tags...',
+            availableTags: tags_array
+        });
+
+        //show it
+        $('.update-bookmark-container').removeClass('hidden');
+    });
+
+    //clear the form if cancelled
+    $('.bookmark-form.update .cancel').on('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $('.bookmark-form.update').trigger('reset');
+        $('.bookmark-form.update input[name=tags]').tagit('destroy');
+        $('.update-bookmark-container').addClass('hidden');
     });
 }
 

@@ -71,6 +71,8 @@ ul.tagit-autocomplete li.ui-menu-item {
     border-radius: 3px;
     margin-left: 5px;
     font-size: 1.2em;
+    background-color: #FFF;
+    z-index: 9999;
 }
 ul.tagit-autocomplete li.ui-menu-item:first-child {
     margin-left: 0;
@@ -84,7 +86,7 @@ ul.tagit-autocomplete li.ui-menu-item:first-child {
     position: relative;
 }
 .sidebar-section-title {
-    color: #FFFFFF;
+    color: #FFF;
 }
 .sidebar-nav .selected {
     text-decoration: none;
@@ -131,15 +133,23 @@ ul.tagit-autocomplete li.ui-menu-item:first-child {
 .bookmark-list .fa-lock {
     right: 8px;
 }
+.bookmark-list .update-button,
 .bookmark-list .delete-button {
     border:none;
     background: none;
 }
+.bookmark-list .update-form,
 .bookmark-list .delete-form {
     margin-left: 0.3em;
     bottom: 10px;
     position: absolute;
     right: 0;
+    
+}
+.bookmark-list .update-form {
+    right: 30px;
+}
+.bookmark-list .delete-form {
     color: rgb(203, 85, 85);
 }
 .bookmark-item .name {
@@ -163,29 +173,37 @@ ul.tagit-autocomplete li.ui-menu-item:first-child {
     margin-bottom: 25px;
 }
 
-/* new bookmark form */
-.new-bookmark-container {
+/* new/update bookmark form */
+.new-bookmark-container,
+.update-bookmark-container {
     z-index: 1000;
     position: fixed;
     width: 100%;
     top: 0;
     left: 0;
 }
-.new-bookmark-subcontainer {
+.new-bookmark-subcontainer,
+.update-bookmark-subcontainer {
     border: 1px solid rgb(204, 204, 204);
     border-radius: 3px;
     padding: 20px;
     position: relative;
     top: 75px;
-    background-color: white;
+    background-color: #FFF;
     box-shadow: 0 0 8px rgb(204, 204, 204);
     max-width: 650px;
     margin: 0 auto;
     width: 100%;
 }
-.bookmark-form #name, .bookmark-form #url {
+.new-bookmark-subcontainer .bookmark-form #name,
+.new-bookmark-subcontainer .bookmark-form #url,
+.update-bookmark-subcontainer .bookmark-form #name,
+.update-bookmark-subcontainer .bookmark-form #url
+{
     padding-left: 2px;
 }
-.bookmark-form .cancel {
+.new-bookmark-subcontainer .bookmark-form .cancel,
+.update-bookmark-subcontainer .bookmark-form .cancel
+{
     margin-left: 10px;
 }
